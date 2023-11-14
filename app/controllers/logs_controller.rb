@@ -21,7 +21,7 @@ class LogsController < ApplicationController
 
   # POST /logs or /logs.json
   def create
-    @log = Log.new(log_params)
+    @log = current_user.logs.new(log_params)
 
     respond_to do |format|
       if @log.save
@@ -65,6 +65,6 @@ class LogsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def log_params
-      params.require(:log).permit(:registered_on, :user_id)
+      params.require(:log).permit(:registered_on)
     end
 end
